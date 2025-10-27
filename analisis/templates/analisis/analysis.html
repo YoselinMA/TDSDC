@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDSDC</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background: linear-gradient(180deg, #0d0d1a, #8000ff); /* negro a morado */
+            color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: rgba(13, 13, 26, 0.95); /* negro semitransparente */
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        h1, h2 {
+            color: #d699ff; /* morado suave */
+        }
+        p, ul, li {
+            color: #f0f0f0;
+        }
+        pre {
+            background-color: rgba(0,0,0,0.2);
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            color: #fff;
+        }
+        table {
+            color: #fff !important;
+        }
+        th {
+            background-color: #9933ff !important; /* morado más intenso */
+        }
+        tr:nth-child(even) {
+            background-color: rgba(255,255,255,0.05) !important;
+        }
+        tr:nth-child(odd) {
+            background-color: rgba(255,255,255,0.1) !important;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="mb-4 text-center">Tecnica de selección de Caracteristicas</h1>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% else %}
+
+    <!-- Sección de Vista General -->
+    <div class="section table-responsive">
+        <h2>Vista General (Primeros registros)</h2>
+        <p>Esta es una muestra de los primeros registros del dataset:</p>
+        {{ head_html|safe }}
+    </div>
+
+    <!-- Sección Estadísticas Descriptivas -->
+    <div class="section table-responsive">
+        <h2>Estadísticas Descriptivas</h2>
+        <p>Resumen estadístico de las columnas numéricas:</p>
+        {{ describe_html|safe }}
+    </div>
+
+    <!-- Sección Información del Dataset -->
+    <div class="section">
+        <h2>Información del Dataset</h2>
+        <p>Detalle de columnas, tipos de datos</p>
+        <pre>{{ info_text }}</pre>
+    </div>
+
+    <!-- Sección Split de Datos -->
+    <div class="section table-responsive">
+        <h2>División de Datos (Train / Validation / Test)</h2>
+        <p>El dataset fue dividido para entrenamiento, validación y prueba. Se utilizó la columna <strong>{{ stratify_used }}.</strong></p>
+        <ul>
+            <li><strong>Train:</strong> {{ shapes.train_shape }}</li>
+            <li><strong>Validation:</strong> {{ shapes.val_shape }}</li>
+            <li><strong>Test:</strong> {{ shapes.test_shape }}</li>
+        </ul>
+
+        {{ train_head_html|safe }}
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+</html>
