@@ -1,10 +1,9 @@
 Django
+gunicorn
 pandas
 scikit-learn
-whitenoise
-gunicorn
+numpy
+matplotlib
+seaborn
 requests
-pandas
-
-
-
+gdown
