@@ -4,5 +4,7 @@ scikit-learn
 whitenoise
 gunicorn
 requests
+pandas
+
 
 
